@@ -15,9 +15,15 @@ namespace MVC5Course.Controllers
         private FabricsEntities db = new FabricsEntities();
 
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(bool? Active)
         {
-            return View(db.Product.OrderByDescending(x=>x.ProductId).Take(20));
+			var data = db.Product.OrderByDescending(x => x.ProductId).Take(20);
+			if (Active !=null)
+			{
+				data = data.Where(x => x.Active.HasValue && x.Active.Value == Active);
+			}
+
+			return View(data);
         }
 
         // GET: Products/Details/5
@@ -48,7 +54,7 @@ namespace MVC5Course.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) //驗證
             {
                 db.Product.Add(product);
                 db.SaveChanges();
