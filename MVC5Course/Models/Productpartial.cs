@@ -9,12 +9,12 @@ namespace MVC5Course.Models
 {
 	[MetadataType(typeof(Productdata))]
 	public partial class Product {
-
+		public int 數量 { get { return this.OrderLine.Count; } }
 	}
 	public partial class Productdata
 	{
 		[Required(ErrorMessage = "請輸入商品名稱")]
-		[MinLength(3), MaxLength(30, ErrorMessage = "最大長度30字")]
+		[MinLength(3), MaxLength(100, ErrorMessage = "最大長度30字")]
 		[DisplayName("商品名稱")]
 		public string ProductName { get; set; }
 		[Required]
