@@ -37,7 +37,8 @@ namespace MVC5Course.Controllers
 		}
 		public ActionResult Details(int id)
 		{
-			var product = DB.Product.Where(x => x.ProductId == id).FirstOrDefault();
+			var product = DB.Database.SqlQuery<Product>("SELECT * From dbo.Product WHERE ProductID=@p0 AND Active=@p1", id,true).FirstOrDefault();
+			//var product = DB.Product.Where(x => x.ProductId == id).FirstOrDefault();
 			return View(product);
 		}
 		public ActionResult Edit(int id)
@@ -78,6 +79,9 @@ namespace MVC5Course.Controllers
 			//DB.OrderLine.RemoveRange(product.OrderLine);
 			//DB.Product.Remove(DB.Product.Find(id));
 			product.isDeleted = true;
+
+			
+			//DB.Database.ExecuteSqlCommand("DELETE From dbo.Product");
 			try
 			{
 				DB.SaveChanges();
