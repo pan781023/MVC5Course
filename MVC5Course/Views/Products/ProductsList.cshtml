@@ -1,14 +1,31 @@
 ﻿@model IEnumerable<MVC5Course.Models.ViewModels.ProductListVM>
 
 @{
-    ViewBag.Title = "Action";
+	ViewBag.Title = "ProductsList";
 }
-
+@if (TempData["CreateProduct_result"] != null)
+{
+	<h1>@TempData["CreateProduct_result"] </h1>
+}
 <h2>Action</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+<form method="get">
+@*@Html.BeginForm(){*@ 	
+@Html.ValidationSummary("結果：", new { @class = "text-danger" })@*加入此程式碼*@
+	查詢:
+	@Html.TextBox("q")
+	庫存數量
+	@Html.TextBox("minnum",0,new {size ="10" ,type = "number" })-
+	@*@Html.ValidationMessageFor( , "", new { @class = "text-danger" })*@
+	@*@Html.ValidationMessageFor(, "", new { @class = "text-danger" })*@
+	@Html.TextBox("maxnum", 999, new { size = "10", type = "number" })
+	<button >送出</button>
+	@*  *@}
+</form>
 <table class="table">
     <tr>
         <th>
@@ -50,3 +67,6 @@
 }
 
 </table>
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}

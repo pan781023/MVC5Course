@@ -1,0 +1,16 @@
+﻿
+@{
+    Layout = null;
+	var test = "<script>alert('你被入侵')</script>";
+}
+@DateTime.Now;
+@Html.Raw(test);
+
+@if (ViewBag.isEnabled !=null)
+{
+	<span>啟用</span>
+	<text> 文字</text>
+
+}
+
+

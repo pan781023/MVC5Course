@@ -1,5 +1,12 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿
+@{
+	ViewBag.Title = "Home Page";
+
+	//var data = @ViewData["ppp"] as 
+}
+@if (TempData["alert"] != null)
+{
+	<h1>@TempData["alert"] </h1>
 }
 
 <div class="jumbotron">
